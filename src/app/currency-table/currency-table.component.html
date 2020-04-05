@@ -1,5 +1,7 @@
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="items$ | async" class="full-width-table" matSort aria-label="Elements">
+  <button mat-button (click)="addSub()"> subscribe </button>
+  <button mat-button (click)="unsubscribe()"> unsubscribe </button>
+  <table mat-table [dataSource]="items$ | async" class="full-width-table" matSort aria-label="Coins">
     <!-- Id Column -->
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Icon</th>

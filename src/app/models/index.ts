@@ -1,3 +1,4 @@
+import { CoinFlags } from './web-scoket.types';
 
 export interface Weiss {
   Rating: string;
@@ -94,4 +95,5 @@ export interface CurrencyTableItem {
   fullName: string;
   pictureUrl: string;
   price: number;
+  flag?: CoinFlags;
 }

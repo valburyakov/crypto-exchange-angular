@@ -32,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
