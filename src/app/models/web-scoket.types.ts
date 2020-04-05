@@ -1,8 +1,9 @@
 export enum WsMessageTypes {
   CCCAGG = '5',
   HEARTBEAT = '999',
-  SUBSCRIBECOMPLETE = 16,
-  UNSUBSCRIBECOMPLETE = 18
+  SUBSCRIBECOMPLETE = '16',
+  LOADCOMPLETE = '3',
+  UNSUBSCRIBEALLCOMPLETE = '18'
 }
 
 export enum CoinFlags {

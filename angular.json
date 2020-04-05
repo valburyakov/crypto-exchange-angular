@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "crypto-exchange"
+  "defaultProject": "crypto-exchange",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }

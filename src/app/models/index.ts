@@ -90,7 +90,7 @@ export interface TopCoinsResponse {
 }
 
 
-export interface CurrencyTableItem {
+export interface CoinItem {
   name: string;
   fullName: string;
   pictureUrl: string;

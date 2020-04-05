@@ -1,8 +1,6 @@
 <div class="mat-elevation-z8">
-  <button mat-button (click)="addSub()"> subscribe </button>
-  <button mat-button (click)="unsubscribe()"> unsubscribe </button>
-  <table mat-table [dataSource]="items$ | async" class="full-width-table" matSort aria-label="Coins">
-    <!-- Id Column -->
+  <mat-progress-bar *ngIf="loading" mode="query"></mat-progress-bar>
+  <table mat-table [dataSource]="coins" class="full-width-table" matSort aria-label="Coins">
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Icon</th>
       <td mat-cell *matCellDef="let row">
@@ -10,15 +8,22 @@
       </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-      <td mat-cell *matCellDef="let row">{{row.price}}</td>
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="align-middle">&#36;{{row.price}}
+        <mat-icon [color]="row.flag === coinFlags.DOWN ? 'error' : 'success'">
+        {{  row.flag === coinFlags.DOWN
+        ? 'arrow_downward'
+        : row.flag === coinFlags.UP ? 'arrow_upward' : '' }}
+        </mat-icon>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

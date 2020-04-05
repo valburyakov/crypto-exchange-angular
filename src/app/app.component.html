@@ -1,3 +1,7 @@
 <app-navigation>
-  <app-currency-table></app-currency-table>
+  <div class="button-row">
+    <button mat-button [disabled]="subscribed" (click)="addSub()"> subscribe </button>
+    <button mat-button [disabled]="!subscribed" (click)="unsubscribe()"> unsubscribe </button>
+  </div>
+  <app-currency-table [coins]="items$ | async" [loading]="loading$ | async"></app-currency-table>
 </app-navigation>
