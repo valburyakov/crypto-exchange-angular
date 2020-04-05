@@ -123,6 +123,10 @@
               "devServerTarget": "crypto-exchange:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
