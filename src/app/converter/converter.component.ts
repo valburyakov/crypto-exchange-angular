@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { combineLatest, merge, Subject } from 'rxjs';
@@ -8,11 +8,13 @@ import { combineLatest, merge, Subject } from 'rxjs';
   templateUrl: './converter.component.html',
   styleUrls: ['./converter.component.scss']
 })
-export class ConverterComponent implements OnInit, OnDestroy {
+export class ConverterComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() currencies: string[];
 
   @Input() rate: number;
+
+  @Input() activeCurrency: string;
 
   @Output() currencyChanged = new EventEmitter<{from: string, to: string}>();
 
@@ -55,6 +57,12 @@ export class ConverterComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.activeCurrency && changes.activeCurrency.currentValue) {
+      this.form.get('fromCurrency').setValue(this.activeCurrency);
+    }
   }
 
 }

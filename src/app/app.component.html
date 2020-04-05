@@ -6,10 +6,11 @@
   <mat-progress-bar *ngIf="loading$ | async" mode="query"></mat-progress-bar>
 
   <div class="container">
-    <app-currency-table class="table" [coins]="items$ | async"></app-currency-table>
+    <app-currency-table class="table" [coins]="items$ | async" (selected)="onRowSelect($event)"></app-currency-table>
     <app-converter [currencies]="coinsList$ | async"
+                   [activeCurrency]="activeCoinId$ | async"
                    [rate]="currentRate$ | async"
-                   (currencyChanged)="loadRate($event)" >
+                   (currencyChanged)="loadRate($event)">
     </app-converter>
   </div>
 </app-navigation>

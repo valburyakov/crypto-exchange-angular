@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CoinItem } from '../models';
 import { CoinFlags } from '../models/web-scoket.types';
 
@@ -13,6 +13,12 @@ export class CurrencyTableComponent {
 
   @Input() coins: CoinItem[];
 
+  @Output() selected = new EventEmitter<string>();
+
   displayedColumns = ['image', 'name', 'price'];
   coinFlags = CoinFlags;
+
+  selectRow(row: CoinItem) {
+    this.selected.emit(row.name);
+  }
 }

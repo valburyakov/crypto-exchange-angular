@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { filter, switchMapTo } from 'rxjs/operators';
 import { CoinItem } from './models';
 import { CoinFlags, WsMessageTypes } from './models/web-scoket.types';
+import { ID } from '@datorama/akita';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   coinsList$: Observable<string[]>;
   loading$: Observable<boolean>;
   currentRate$: Observable<number>;
+  activeCoinId$: Observable<ID>;
 
   subscribed = false;
 
@@ -39,6 +41,7 @@ export class AppComponent implements OnInit {
     this.loading$ = this.coinsQuery.selectLoading();
     this.coinsList$ = this.coinsQuery.coinNames$;
     this.currentRate$ = this.coinsQuery.currentRate$;
+    this.activeCoinId$ = this.coinsQuery.selectActiveId();
 
 
     const eventMapper = (message: string): Partial<CoinItem> => {
@@ -77,5 +80,9 @@ export class AppComponent implements OnInit {
 
   loadRate(event: { from: string; to: string }) {
     this.coinsService.getRate(event.from, event.to).subscribe();
+  }
+
+  onRowSelect(coinName: string) {
+    this.coinsService.setSelected(coinName);
   }
 }

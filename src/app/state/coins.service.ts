@@ -30,4 +30,8 @@ export class CoinsService {
       this.coinsStore.update({currentRate: price});
     }));
   }
+
+  setSelected(id: string) {
+    this.coinsStore.setActive(id);
+  }
 }
