@@ -13,8 +13,6 @@ export class CurrencyTableComponent {
 
   @Input() coins: CoinItem[];
 
-  @Input() loading: boolean;
-
   displayedColumns = ['image', 'name', 'price'];
   coinFlags = CoinFlags;
 }

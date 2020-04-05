@@ -2,3 +2,11 @@
 .button-row a {
   margin-right: 8px;
 }
+
+.container {
+  display: flex;
+
+  .table {
+    flex-basis: 450px;
+  }
+}

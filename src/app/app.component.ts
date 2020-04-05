@@ -16,7 +16,9 @@ export class AppComponent implements OnInit {
   title = 'crypto-exchange';
 
   items$: Observable<CoinItem[]>;
+  coinsList$: Observable<string[]>;
   loading$: Observable<boolean>;
+  currentRate$: Observable<number>;
 
   subscribed = false;
 
@@ -29,10 +31,15 @@ export class AppComponent implements OnInit {
       switchMapTo(this.wsService.status),
       filter(Boolean)
     )
-      .subscribe(_ => this.addSub());
+      .subscribe(
+        _ => this.addSub()
+      );
 
     this.items$ = this.coinsQuery.selectAll();
     this.loading$ = this.coinsQuery.selectLoading();
+    this.coinsList$ = this.coinsQuery.coinNames$;
+    this.currentRate$ = this.coinsQuery.currentRate$;
+
 
     const eventMapper = (message: string): Partial<CoinItem> => {
       const parts = message.split('~');
@@ -57,14 +64,18 @@ export class AppComponent implements OnInit {
   addSub() {
     this.wsService.send({
       action: 'SubAdd',
-      subs: this.coinsQuery.getValue().ids.map(id => `5~CCCAGG~${id}~USD`)
+      subs: this.coinsQuery.ids.map(id => `5~CCCAGG~${id}~USD`)
     });
   }
 
   unsubscribe() {
     this.wsService.send({
       action: 'SubRemove',
-      subs: this.coinsQuery.getValue().ids.map(id => `5~CCCAGG~${id}~USD`)
+      subs: this.coinsQuery.ids.map(id => `5~CCCAGG~${id}~USD`)
     });
+  }
+
+  loadRate(event: { from: string; to: string }) {
+    this.coinsService.getRate(event.from, event.to).subscribe();
   }
 }

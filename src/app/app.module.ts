@@ -17,12 +17,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ConverterComponent } from './converter/converter.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    CurrencyTableComponent
+    CurrencyTableComponent,
+    ConverterComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +42,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatButtonModule,
-    MatIconModule,
     MatProgressBarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   providers: [],

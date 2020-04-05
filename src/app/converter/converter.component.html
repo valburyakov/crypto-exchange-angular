@@ -1,0 +1,30 @@
+<fieldset>
+  <legend>Converter</legend>
+  <div class="example-container" [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="fromAmount" type="number" [value]="form.get('toAmount').value * (1/rate)">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>From</mat-label>
+      <mat-select formControlName="fromCurrency">
+        <mat-option *ngFor="let curr of currencies" [value]="curr">{{curr}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="example-container" [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" formControlName="toAmount" [value]="form.get('fromAmount').value * rate">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>To</mat-label>
+      <mat-select formControlName="toCurrency">
+        <mat-option *ngFor="let curr of currencies" [value]="curr">{{curr}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</fieldset>

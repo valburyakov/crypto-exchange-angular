@@ -24,4 +24,10 @@ export class CoinsService {
   remove(id: string) {
     this.coinsStore.remove(id);
   }
+
+  getRate(from: string, to: string) {
+    return this.cryptoService.getCurrencyPrice(from, to).pipe(tap(price => {
+      this.coinsStore.update({currentRate: price});
+    }));
+  }
 }

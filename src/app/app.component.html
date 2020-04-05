@@ -3,5 +3,13 @@
     <button mat-button [disabled]="subscribed" (click)="addSub()"> subscribe </button>
     <button mat-button [disabled]="!subscribed" (click)="unsubscribe()"> unsubscribe </button>
   </div>
-  <app-currency-table [coins]="items$ | async" [loading]="loading$ | async"></app-currency-table>
+  <mat-progress-bar *ngIf="loading$ | async" mode="query"></mat-progress-bar>
+
+  <div class="container">
+    <app-currency-table class="table" [coins]="items$ | async"></app-currency-table>
+    <app-converter [currencies]="coinsList$ | async"
+                   [rate]="currentRate$ | async"
+                   (currencyChanged)="loadRate($event)" >
+    </app-converter>
+  </div>
 </app-navigation>

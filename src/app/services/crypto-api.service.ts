@@ -24,4 +24,10 @@ export class CryptoApiService {
     );
   }
 
+  getCurrencyPrice(from: string, to: string): Observable<number> {
+    return this.http.get<{[key: string]: number}>(`${environment.apiUrl}/data/price?fsym=${from}&tsyms=${to}`).pipe(
+      map(res => res[to])
+    );
+  }
+
 }
